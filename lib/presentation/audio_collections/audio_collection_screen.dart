@@ -1,4 +1,5 @@
 import 'package:audio_player/presentation/audio_collections/audio_section_panel.dart';
+import 'package:audio_player/presentation/audio_collections/ui_models/audio_group_ui.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -8,15 +9,31 @@ class AudioCollectionScreen extends StatefulWidget {
 }
 
 class _AudioCollectionScreenState extends State<AudioCollectionScreen> {
+  static final _meditationAudioGroupList = [
+    AudioGroupUi('Favorite Group', ['firstAudio', 'secondAudio']),
+    AudioGroupUi('From YouTube', ['firstAudio', 'secondAudio']),
+  ];
+
+  static final _courseAudioGroupList = [
+    AudioGroupUi('Coursera', ['firstCource', 'secondAudio']),
+    AudioGroupUi('Udemy', ['firstAudio', 'secondAudio']),
+    AudioGroupUi('Udacity', ['firstAudio', 'secondAudio']),
+  ];
+
+  static final _soundAudioGroupList = [
+    AudioGroupUi('forest', ['firstAudio', 'secondAudio']),
+    AudioGroupUi('relax', ['firstAudio', 'secondAudio']),
+  ];
+
   static final _segmentedValues = {
     "meditation": _SegmentedTab(title: "Meditation"),
-    "courses": _SegmentedTab(title: "Cources"),
+    "courses": _SegmentedTab(title: "Courses"),
     "sounds": _SegmentedTab(title: "Sounds")
   };
-  static final _segmentedChildrens = {
-    "meditation": AudioSectionPanel(title: "Meditation"),
-    "courses": AudioSectionPanel(title: "Cources"),
-    "sounds": AudioSectionPanel(title: "Sounds")
+  static final _segmentedChildren = {
+    "meditation": AudioSectionPanel(audioGroupUiList: _meditationAudioGroupList),
+    "courses": AudioSectionPanel(audioGroupUiList: _courseAudioGroupList),
+    "sounds": AudioSectionPanel(audioGroupUiList: _soundAudioGroupList)
   };
   var groupValue = _segmentedValues.keys.first;
 
@@ -54,7 +71,7 @@ class _AudioCollectionScreenState extends State<AudioCollectionScreen> {
             ),
             preferredSize: Size(double.infinity, 44)),
       ),
-      body: _segmentedChildrens[groupValue],
+      body: _segmentedChildren[groupValue],
     );
   }
 }

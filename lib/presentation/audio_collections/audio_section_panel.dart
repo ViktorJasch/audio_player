@@ -3,21 +3,17 @@ import 'package:audio_player/presentation/audio_collections/ui_models/audio_grou
 import 'package:flutter/cupertino.dart';
 
 class AudioSectionPanel extends StatelessWidget {
-  final String title;
-  final List<AudioGroupUi> audioGroupUiList = [
-    AudioGroupUi('Favorite Group', ['firstAudio', 'secondAudio']),
-    AudioGroupUi('From YouTube', ['firstAudio', 'secondAudio']),
-  ];
+  final List<AudioGroupUi> audioGroupUiList;
 
-  AudioSectionPanel({this.title});
+  AudioSectionPanel({this.audioGroupUiList});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: ListView(
         children: <Widget>[
-          AudioGroupHorizontalList(audioGroupUi: audioGroupUiList[0]),
-          AudioGroupHorizontalList(audioGroupUi: audioGroupUiList[1]),
+          for (var audioGroup in audioGroupUiList)
+            AudioGroupHorizontalList(audioGroupUi: audioGroup),
         ],
       )
     );
