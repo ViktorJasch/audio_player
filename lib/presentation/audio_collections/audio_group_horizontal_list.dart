@@ -19,39 +19,16 @@ class AudioGroupHorizontalList extends StatelessWidget {
         ),
         Container(
           height: 176,
-          child: ListView.builder(
+          child: ListView(
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
-            itemCount: audioGroupUi.groupItemList.length,
-            itemBuilder: (context, index) {
-              return Container(
-                margin: EdgeInsets.only(
-                  right: 16,
-                  left: index == 0 ? 16 : 0
-                ),
-                width: 320,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(8)),
-                    color: Color.fromRGBO(57, 60, 79, 0.3)
-                ),
-                child: Stack(
-                  children: <Widget>[
-                    Center(
-                      child: Icon(
-                        CupertinoIcons.photo_camera_solid,
-                        color: CupertinoColors.white,
-                        size: 128,
-                      ),
-                    ),
-                    Positioned(
-                      child: Text(audioGroupUi.groupItemList[index]),
-                      top: 8,
-                      left: 8,
-                    )
-                  ],
-                ),
-              );
-            },
+            children: <Widget>[
+              for (var item in audioGroupUi.groupItemList)
+                _HorizontalListItem(
+                  itemTitle: item,
+                  isFirst: audioGroupUi.groupItemList.indexOf(item) == 0,
+                )
+            ],
           ),
         ),
       ],
@@ -89,3 +66,40 @@ class _GroupHeader extends StatelessWidget {
   }
 }
 
+class _HorizontalListItem extends StatelessWidget {
+  final String itemTitle;
+  final bool isFirst;
+
+  _HorizontalListItem({this.itemTitle, this.isFirst});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(
+          right: 16,
+          left: isFirst ? 16 : 0
+      ),
+      width: 320,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(8)),
+          color: Color.fromRGBO(57, 60, 79, 0.3)
+      ),
+      child: Stack(
+        children: <Widget>[
+          Center(
+            child: Icon(
+              CupertinoIcons.photo_camera_solid,
+              color: CupertinoColors.white,
+              size: 128,
+            ),
+          ),
+          Positioned(
+            child: Text(itemTitle),
+            top: 8,
+            left: 8,
+          )
+        ],
+      ),
+    );
+  }
+}
