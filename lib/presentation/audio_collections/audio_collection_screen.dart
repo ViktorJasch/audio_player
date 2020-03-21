@@ -1,5 +1,6 @@
 import 'package:audio_player/presentation/audio_collections/audio_section_panel.dart';
 import 'package:audio_player/presentation/audio_collections/ui_models/audio_group_ui.dart';
+import 'package:audio_player/presentation/audio_collections/ui_models/audio_item_ui.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -9,20 +10,27 @@ class AudioCollectionScreen extends StatefulWidget {
 }
 
 class _AudioCollectionScreenState extends State<AudioCollectionScreen> {
+  static final item = AudioItemUi(
+      'title',
+      'description',
+      'Demi Moor',
+      '00h 00m',
+      null
+  );
   static final _meditationAudioGroupList = [
-    AudioGroupUi('Favorite Group', ['firstAudio', 'secondAudio']),
-    AudioGroupUi('From YouTube', ['firstAudio', 'secondAudio']),
+    AudioGroupUi('Favorite Group', [item, item]),
+    AudioGroupUi('From YouTube', [item, item]),
   ];
 
   static final _courseAudioGroupList = [
-    AudioGroupUi('Coursera', ['firstCource', 'secondAudio']),
-    AudioGroupUi('Udemy', ['firstAudio', 'secondAudio']),
-    AudioGroupUi('Udacity', ['firstAudio', 'secondAudio']),
+    AudioGroupUi('Coursera', [item, item]),
+    AudioGroupUi('Udemy', [item, item]),
+    AudioGroupUi('Udacity', [item, item]),
   ];
 
   static final _soundAudioGroupList = [
-    AudioGroupUi('forest', ['firstAudio', 'secondAudio']),
-    AudioGroupUi('relax', ['firstAudio', 'secondAudio']),
+    AudioGroupUi('forest', [item, item]),
+    AudioGroupUi('relax', [item, item]),
   ];
 
   static final List<String> _segmentedValues = ["meditation", "courses", "sounds"];

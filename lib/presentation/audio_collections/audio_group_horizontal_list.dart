@@ -25,7 +25,7 @@ class AudioGroupHorizontalList extends StatelessWidget {
             children: <Widget>[
               for (var item in audioGroupUi.groupItemList)
                 _HorizontalListItem(
-                  itemTitle: item,
+                  item: item,
                   isFirst: audioGroupUi.groupItemList.indexOf(item) == 0,
                 )
             ],
@@ -67,10 +67,10 @@ class _GroupHeader extends StatelessWidget {
 }
 
 class _HorizontalListItem extends StatelessWidget {
-  final String itemTitle;
+  final AudioItemUi item;
   final bool isFirst;
 
-  _HorizontalListItem({this.itemTitle, this.isFirst});
+  _HorizontalListItem({this.item, this.isFirst});
 
   @override
   Widget build(BuildContext context) {
@@ -85,13 +85,9 @@ class _HorizontalListItem extends StatelessWidget {
           color: Color.fromRGBO(57, 60, 79, 0.3)
       ),
       child: AudioGroupItem(
-        item: AudioItemUi(
-          'title',
-          'description',
-          'Demi Moor',
-          '00h 00m',
-          null
-        ),
+        item: item,
+        onBeginPress: () => print('onBeginPressed!!!'),
+        onItemTap: () => print('onItemTaaap!!!'),
       )
     );
   }
