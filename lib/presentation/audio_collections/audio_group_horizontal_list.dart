@@ -1,12 +1,12 @@
+import 'package:audio_player/presentation/audio_collections/audio_group_item.dart';
 import 'package:audio_player/presentation/audio_collections/ui_models/audio_group_ui.dart';
+import 'package:audio_player/presentation/audio_collections/ui_models/audio_item_ui.dart';
 import 'package:flutter/cupertino.dart';
 
 class AudioGroupHorizontalList extends StatelessWidget {
   final AudioGroupUi audioGroupUi;
 
-  AudioGroupHorizontalList({
-    @required this.audioGroupUi
-  });
+  AudioGroupHorizontalList({@required this.audioGroupUi});
 
   @override
   Widget build(BuildContext context) {
@@ -84,22 +84,15 @@ class _HorizontalListItem extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(8)),
           color: Color.fromRGBO(57, 60, 79, 0.3)
       ),
-      child: Stack(
-        children: <Widget>[
-          Center(
-            child: Icon(
-              CupertinoIcons.photo_camera_solid,
-              color: CupertinoColors.white,
-              size: 128,
-            ),
-          ),
-          Positioned(
-            child: Text(itemTitle),
-            top: 8,
-            left: 8,
-          )
-        ],
-      ),
+      child: AudioGroupItem(
+        item: AudioItemUi(
+          'title',
+          'description',
+          'Demi Moor',
+          '00h 00m',
+          null
+        ),
+      )
     );
   }
 }
