@@ -1,3 +1,4 @@
+import 'package:audio_player/presentation/audio_collections/audio_group_horizontal_list.dart';
 import 'package:flutter/cupertino.dart';
 
 class AudioSectionPanel extends StatelessWidget {
@@ -8,13 +9,7 @@ class AudioSectionPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      alignment: Alignment.center,
-      child: Text(
-        title,
-        style: TextStyle(
-          color: CupertinoColors.black,
-        ),
-      ),
+      child: AudioGroupHorizontalList(),
     );
   }
 }
