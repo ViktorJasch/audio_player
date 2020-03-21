@@ -2,7 +2,11 @@ import 'package:audio_player/presentation/audio_collections/ui_models/audio_grou
 import 'package:flutter/cupertino.dart';
 
 class AudioGroupHorizontalList extends StatelessWidget {
-  final AudioGroupUi audioGroupUi = AudioGroupUi('Favorite Group', ['firstAudio', 'secondAudio']);
+  final AudioGroupUi audioGroupUi;
+
+  AudioGroupHorizontalList({
+    @required this.audioGroupUi
+  });
 
   @override
   Widget build(BuildContext context) {
