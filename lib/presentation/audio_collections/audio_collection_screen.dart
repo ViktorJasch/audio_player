@@ -41,7 +41,7 @@ class _AudioCollectionScreenState extends State<AudioCollectionScreen> {
               child: CupertinoSegmentedControl(
                 selectedColor: Colors.white,
                 borderColor: Colors.grey,
-                unselectedColor: Colors.grey,
+                unselectedColor: Color.fromRGBO(170, 180, 186, 0.2),
                 pressedColor: Color(0x747784),
                 children: _segmentedValues,
                 groupValue: groupValue,
