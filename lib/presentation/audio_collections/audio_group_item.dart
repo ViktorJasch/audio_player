@@ -22,7 +22,7 @@ class AudioGroupItem extends StatelessWidget {
         padding: EdgeInsets.all(16),
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: ExactAssetImage('assets/background.png', scale: 3),
+            image: AssetImage('assets/background.png'),
             fit: BoxFit.cover
           ),
           borderRadius: BorderRadius.all(Radius.circular(8)),
