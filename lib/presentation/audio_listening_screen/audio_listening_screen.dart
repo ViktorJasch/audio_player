@@ -1,4 +1,6 @@
 import 'package:audio_player/presentation/audio_collections/ui_models/audio_item_ui.dart';
+import 'package:audio_player/presentation/audio_listening_screen/audio_state_enum.dart';
+import 'package:audio_player/presentation/audio_listening_screen/circle_timer.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
 
@@ -39,16 +41,13 @@ class AudioListeningScreen extends StatelessWidget {
                     color: Colors.white
                   ),
                 ),
-                Spacer(flex: 1),
-                Container(
-                  width: 240,
-                  height: 240,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(Radius.circular(120)),
-                  ),
-                ),
                 Spacer(flex: 2),
+                CircleTimer(
+                  audioDuration: Duration(seconds: 40),
+                  title: 'Title',
+                  initialState: isPlaying ? AudioStateEnum.active : AudioStateEnum.stop,
+                ),
+                Spacer(flex: 3),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 32.0, left: 16, right: 16),
                   child: isPlaying ? _AudioActionPanel.active() : _AudioActionPanel.stop(),
@@ -94,18 +93,14 @@ class _FullTransparentAppBar extends StatelessWidget {
 }
 
 class _AudioActionPanel extends StatefulWidget {
-  static const String _stopState = 'stop';
-  static const String _activeState = 'active';
-  static const String _pauseState = 'pause';
-
-  String _initState;
+  AudioStateEnum _initState;
 
   _AudioActionPanel.active() {
-    _initState = _activeState;
+    _initState = AudioStateEnum.active;
   }
 
   _AudioActionPanel.stop() {
-    _initState = _pauseState;
+    _initState = AudioStateEnum.stop;
   }
 
   @override
@@ -119,9 +114,9 @@ class _AudioActionPanelState extends State<_AudioActionPanel> {
 
   @override
   Widget build(BuildContext context) {
-    if (_currentState == _AudioActionPanel._pauseState) {
+    if (_currentState == AudioStateEnum.pause) {
       return _buildPauseState();
-    } else if (_currentState == _AudioActionPanel._activeState) {
+    } else if (_currentState == AudioStateEnum.active) {
       return _buildActiveState();
     } else {
       return _buildStopState();
@@ -133,7 +128,7 @@ class _AudioActionPanelState extends State<_AudioActionPanel> {
       title: 'Pause',
       onPressed: () =>
           setState(() {
-            _currentState = _AudioActionPanel._pauseState;
+            _currentState = AudioStateEnum.pause;
           }),
     );
   }
@@ -146,7 +141,7 @@ class _AudioActionPanelState extends State<_AudioActionPanel> {
           title: 'Stop',
           onPressed: () =>
             setState(() {
-              _currentState = _AudioActionPanel._stopState;
+              _currentState = AudioStateEnum.stop;
             }),
         ),
         _ActionButton(
@@ -154,7 +149,7 @@ class _AudioActionPanelState extends State<_AudioActionPanel> {
           isAccent: true,
           onPressed: () =>
               setState(() {
-                _currentState = _AudioActionPanel._activeState;
+                _currentState = AudioStateEnum.active;
               }),
         )
       ],
@@ -167,7 +162,7 @@ class _AudioActionPanelState extends State<_AudioActionPanel> {
       isAccent: true,
       onPressed: () =>
           setState(() {
-            _currentState = _AudioActionPanel._pauseState;
+            _currentState = AudioStateEnum.pause;
           }),
     );
   }
