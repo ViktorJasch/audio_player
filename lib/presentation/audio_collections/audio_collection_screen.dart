@@ -81,6 +81,7 @@ class _AudioCollectionScreenState extends State<AudioCollectionScreen> {
           preferredSize: Size(double.infinity, 44)),
       ),
       body: AudioSectionPanel(
+        key: ValueKey(groupValue),
         audioGroupUiList: _segmentedChildren[groupValue].toList(),
       ),
     );
