@@ -16,7 +16,9 @@ class AudioGroupHorizontalList extends StatelessWidget {
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.fromLTRB(16, 40, 16, 24),
-          child: _GroupHeader(title: audioGroupUi.groupTitle,),
+          child: _GroupHeader(
+            title: audioGroupUi.groupTitle,
+          ),
         ),
         Container(
           height: 176,
@@ -57,10 +59,8 @@ class _GroupHeader extends StatelessWidget {
         ),
         Text(
           'See all',
-          style: TextStyle(
-              fontSize: 14,
-              color: Color.fromRGBO(57, 60, 79, 0.5)
-          ),
+          style:
+              TextStyle(fontSize: 14, color: Color.fromRGBO(57, 60, 79, 0.5)),
         )
       ],
     );
@@ -76,25 +76,26 @@ class _HorizontalListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(
-          right: 16,
-          left: isFirst ? 16 : 0
-      ),
-      width: 320,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(8)),
-          color: Color.fromRGBO(57, 60, 79, 0.3)
-      ),
-      child: AudioGroupItem(
-        item: item,
-        onBeginPress: () => print('onBeginPressed!!!'),
-        onItemTap: () => Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => AudioListeningScreen(
-            item: item,
-          ))
-        ),
-      )
-    );
+        margin: EdgeInsets.only(right: 16, left: isFirst ? 16 : 0),
+        width: 320,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(8)),
+            color: Color.fromRGBO(57, 60, 79, 0.3)),
+        child: AudioGroupItem(
+          item: item,
+          onBeginPress: () => _navigateToListening(context, true),
+          onItemTap: () => _navigateToListening(context, false),
+        ));
+  }
+
+  void _navigateToListening(BuildContext context, bool isPlaying) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                AudioListeningScreen(
+                  item: item,
+                  isPlaying: isPlaying,
+                )));
   }
 }

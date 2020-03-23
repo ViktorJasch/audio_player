@@ -1,11 +1,13 @@
 import 'package:audio_player/presentation/audio_collections/ui_models/audio_item_ui.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
 
 class AudioListeningScreen extends StatelessWidget {
   final Image background;
   final AudioItemUi item;
+  final bool isPlaying;
 
-  AudioListeningScreen({this.background, this.item});
+  AudioListeningScreen({this.background, this.item, this.isPlaying = false});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,7 @@ class AudioListeningScreen extends StatelessWidget {
           appBar: PreferredSize(
               child: Padding(
                 padding: const EdgeInsets.only(top: 32),
-                child: _FullyTransparentAppBar(),
+                child: _FullTransparentAppBar(),
               ),
               preferredSize: Size.fromHeight(56)),
           body: Container(
@@ -49,7 +51,7 @@ class AudioListeningScreen extends StatelessWidget {
                 Spacer(flex: 2),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 32.0, left: 16, right: 16),
-                  child: _AudioActionPanel.stop(),
+                  child: isPlaying ? _AudioActionPanel.active() : _AudioActionPanel.stop(),
                 )
               ],
             ),
@@ -58,7 +60,7 @@ class AudioListeningScreen extends StatelessWidget {
   }
 }
 
-class _FullyTransparentAppBar extends StatelessWidget {
+class _FullTransparentAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -74,15 +76,15 @@ class _FullyTransparentAppBar extends StatelessWidget {
             ),
           ),
           Spacer(),
-          Icon(
-            Icons.speaker,
+          SvgPicture.asset(
+            'assets/volume.svg',
             color: Colors.white,
           ),
           SizedBox(
             width: 32,
           ),
-          Icon(
-            Icons.settings,
+          SvgPicture.asset(
+            'assets/settings_off.svg',
             color: Colors.white,
           )
         ],
