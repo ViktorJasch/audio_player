@@ -25,11 +25,10 @@ class _CircleTimerState extends State<CircleTimer> {
   @override
   void initState() {
     _handleState(widget.initialState);
-    _subscription = widget.stateStream.listen((AudioStateEnum event) {
+    _subscription = widget.stateStream?.listen((AudioStateEnum event) {
       _handleState(event);
     });
     _secondsLeft = widget.initialTime?.inSeconds ?? 0;
-    _startTimer();
     super.initState();
   }
 
@@ -63,12 +62,12 @@ class _CircleTimerState extends State<CircleTimer> {
     if (state == AudioStateEnum.active) {
       _startTimer();
     } else if (state == AudioStateEnum.stop) {
-      _timer.cancel();
+      _timer?.cancel();
       setState(() {
         _secondsLeft = 0;
       });
     } else if (state == AudioStateEnum.pause) {
-      _timer.cancel();
+      _timer?.cancel();
     }
   }
 

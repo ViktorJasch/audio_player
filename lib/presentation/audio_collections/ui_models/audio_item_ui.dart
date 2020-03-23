@@ -2,7 +2,7 @@ class AudioItemUi {
   String title;
   String description;
   String author;
-  String time;
+  Duration time;
   Uri imageUri;
 
   AudioItemUi(this.title, this.description, this.author, this.time,

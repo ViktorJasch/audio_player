@@ -3,13 +3,21 @@ import 'package:audio_player/presentation/audio_listening_screen/audio_state_enu
 import 'package:audio_player/presentation/audio_listening_screen/circle_timer.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
+import 'dart:async';
 
-class AudioListeningScreen extends StatelessWidget {
+class AudioListeningScreen extends StatefulWidget {
   final Image background;
   final AudioItemUi item;
   final bool isPlaying;
 
   AudioListeningScreen({this.background, this.item, this.isPlaying = false});
+
+  @override
+  _AudioListeningScreenState createState() => _AudioListeningScreenState();
+}
+
+class _AudioListeningScreenState extends State<AudioListeningScreen> {
+  final _controller = StreamController<AudioStateEnum>();
 
   @override
   Widget build(BuildContext context) {
@@ -34,28 +42,38 @@ class AudioListeningScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  item.title,
+                  widget.item.title,
                   style: TextStyle(
-                    fontWeight: FontWeight.w300,
-                    fontSize: 32,
-                    color: Colors.white
+                      fontWeight: FontWeight.w300,
+                      fontSize: 32,
+                      color: Colors.white
                   ),
                 ),
                 Spacer(flex: 2),
                 CircleTimer(
                   audioDuration: Duration(seconds: 40),
                   title: 'Title',
-                  initialState: isPlaying ? AudioStateEnum.active : AudioStateEnum.stop,
+                  initialState: widget.isPlaying ? AudioStateEnum.active : AudioStateEnum.stop,
+                  stateStream: _controller.stream,
                 ),
                 Spacer(flex: 3),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 32.0, left: 16, right: 16),
-                  child: isPlaying ? _AudioActionPanel.active() : _AudioActionPanel.stop(),
+                  child: _AudioActionPanel(
+                    initState: widget.isPlaying ? AudioStateEnum.active : AudioStateEnum.stop,
+                    sink: _controller.sink,
+                  )
                 )
               ],
             ),
           ),
         ));
+  }
+
+  @override
+  void dispose() {
+    _controller.close();
+    super.dispose();
   }
 }
 
@@ -93,18 +111,12 @@ class _FullTransparentAppBar extends StatelessWidget {
 }
 
 class _AudioActionPanel extends StatefulWidget {
-  AudioStateEnum _initState;
+  final Sink<AudioStateEnum> sink;
+  final AudioStateEnum initState;
 
-  _AudioActionPanel.active() {
-    _initState = AudioStateEnum.active;
-  }
-
-  _AudioActionPanel.stop() {
-    _initState = AudioStateEnum.stop;
-  }
-
+  _AudioActionPanel({this.initState, this.sink});
   @override
-  _AudioActionPanelState createState() => _AudioActionPanelState(_initState);
+  _AudioActionPanelState createState() => _AudioActionPanelState(initState);
 }
 
 class _AudioActionPanelState extends State<_AudioActionPanel> {
@@ -126,10 +138,7 @@ class _AudioActionPanelState extends State<_AudioActionPanel> {
   Widget _buildActiveState() {
     return _ActionButton(
       title: 'Pause',
-      onPressed: () =>
-          setState(() {
-            _currentState = AudioStateEnum.pause;
-          }),
+      onPressed: () => _setNewState(AudioStateEnum.pause)
     );
   }
 
@@ -139,18 +148,12 @@ class _AudioActionPanelState extends State<_AudioActionPanel> {
       children: <Widget>[
         _ActionButton(
           title: 'Stop',
-          onPressed: () =>
-            setState(() {
-              _currentState = AudioStateEnum.stop;
-            }),
+          onPressed: () => _setNewState(AudioStateEnum.stop)
         ),
         _ActionButton(
           title: 'Resume',
           isAccent: true,
-          onPressed: () =>
-              setState(() {
-                _currentState = AudioStateEnum.active;
-              }),
+          onPressed: () => _setNewState(AudioStateEnum.active)
         )
       ],
     );
@@ -160,11 +163,15 @@ class _AudioActionPanelState extends State<_AudioActionPanel> {
     return _ActionButton(
       title: 'Play',
       isAccent: true,
-      onPressed: () =>
-          setState(() {
-            _currentState = AudioStateEnum.pause;
-          }),
+      onPressed: () => _setNewState(AudioStateEnum.active)
     );
+  }
+
+  void _setNewState(AudioStateEnum state) {
+    setState(() {
+      _currentState = state;
+    });
+    widget.sink.add(state);
   }
 }
 
