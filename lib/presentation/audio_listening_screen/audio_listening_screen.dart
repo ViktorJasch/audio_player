@@ -1,5 +1,5 @@
 import 'package:audio_player/presentation/audio_collections/ui_models/audio_item_ui.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:audio_player/presentation/widgets/audio_app_bar.dart';
 import 'package:flutter/material.dart';
 
 class AudioListeningScreen extends StatelessWidget {
@@ -18,12 +18,7 @@ class AudioListeningScreen extends StatelessWidget {
                 fit: BoxFit.cover)),
         child: Scaffold(
           backgroundColor: Colors.transparent,
-          appBar: PreferredSize(
-              child: Padding(
-                padding: const EdgeInsets.only(top: 32),
-                child: _FullTransparentAppBar(),
-              ),
-              preferredSize: Size.fromHeight(56)),
+          appBar: AudioAppBar(),
           body: Container(
             alignment: Alignment.center,
             padding: EdgeInsets.only(top: 72),
@@ -57,39 +52,6 @@ class AudioListeningScreen extends StatelessWidget {
             ),
           ),
         ));
-  }
-}
-
-class _FullTransparentAppBar extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      padding: EdgeInsets.symmetric(horizontal: 16),
-      child: Row(
-        children: <Widget>[
-          InkWell(
-            onTap: () => Navigator.pop(context),
-            child: Icon(
-              Icons.arrow_back_ios,
-              color: Colors.white,
-            ),
-          ),
-          Spacer(),
-          SvgPicture.asset(
-            'assets/volume.svg',
-            color: Colors.white,
-          ),
-          SizedBox(
-            width: 32,
-          ),
-          SvgPicture.asset(
-            'assets/settings_off.svg',
-            color: Colors.white,
-          )
-        ],
-      ),
-    );
   }
 }
 
