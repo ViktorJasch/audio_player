@@ -1,6 +1,7 @@
 import 'package:audio_player/presentation/audio_collections/ui_models/audio_item_ui.dart';
 import 'package:audio_player/presentation/audio_listening_screen/audio_state_enum.dart';
 import 'package:audio_player/presentation/audio_listening_screen/circle_timer.dart';
+import 'package:audio_player/presentation/settings/settings_screen.dart';
 import 'package:audio_player/presentation/widgets/audio_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
@@ -28,7 +29,14 @@ class _AudioListeningScreenState extends State<AudioListeningScreen> {
                 fit: BoxFit.cover)),
         child: Scaffold(
           backgroundColor: Colors.transparent,
-          appBar: AudioAppBar(),
+          appBar: AudioAppBar(
+            onSettingsTap: _navigateToSettings,
+            onVolumeTap: () {
+              print('onVolumeTap');
+            },
+            isSettingsActive: false,
+            isVolumeOn: true,
+          ),
           body: Container(
             alignment: Alignment.center,
             padding: EdgeInsets.only(top: 72),
@@ -70,6 +78,12 @@ class _AudioListeningScreenState extends State<AudioListeningScreen> {
     _controller.close();
     super.dispose();
   }
+
+  void _navigateToSettings() => Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) =>
+              SettingsScreen()));
 }
 
 class _AudioActionPanel extends StatefulWidget {

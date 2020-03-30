@@ -11,10 +11,8 @@ class AudioAppBar extends StatelessWidget implements PreferredSizeWidget {
   AudioAppBar({this.onVolumeTap, this.onSettingsTap, this.isVolumeOn,
       this.isSettingsActive, this.key});
 
-
   @override
   Size get preferredSize => Size.fromHeight(56);
-
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +42,7 @@ class AudioAppBar extends StatelessWidget implements PreferredSizeWidget {
           InkWell(
             onTap: onSettingsTap,
             child: SvgPicture.asset(
-              'assets/settings_off.svg',
+              _getSettingImagePath(),
               color: Colors.white,
             ),
           )
@@ -52,4 +50,8 @@ class AudioAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
     );
   }
+
+  String _getSettingImagePath() => isSettingsActive
+      ? 'assets/settings_on.svg'
+      : 'assets/settings_off.svg';
 }
