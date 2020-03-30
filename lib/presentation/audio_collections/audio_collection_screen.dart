@@ -11,10 +11,10 @@ class AudioCollectionScreen extends StatefulWidget {
 
 class _AudioCollectionScreenState extends State<AudioCollectionScreen> {
   static final item = AudioItemUi(
-      'title',
-      'description',
-      'Demi Moor',
-      '00h 00m',
+      'Who wants to live forever',
+      'very cool song',
+      'Freddy',
+      Duration(seconds: 40),
       null
   );
   static final _meditationAudioGroupList = [

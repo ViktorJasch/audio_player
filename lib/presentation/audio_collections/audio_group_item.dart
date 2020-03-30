@@ -1,4 +1,5 @@
 import 'package:audio_player/presentation/audio_collections/ui_models/audio_item_ui.dart';
+import 'package:audio_player/presentation/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -68,7 +69,7 @@ class AudioGroupItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    _Timer(timerText: item.time),
+                    _Timer(timerText: printDuration(item.time)),
                     Spacer(),
                     InkWell(
                       onTap: onBeginPress,
