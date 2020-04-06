@@ -1,6 +1,6 @@
-import 'package:audio_player/presentation/audio_collections/audio_section_panel.dart';
-import 'package:audio_player/presentation/audio_collections/ui_models/audio_group_ui.dart';
-import 'package:audio_player/presentation/audio_collections/ui_models/audio_item_ui.dart';
+import 'package:audio_player/presentation/pages/audio_collections/audio_section_panel.dart';
+import 'package:audio_player/presentation/pages/audio_collections/ui_models/audio_group_ui.dart';
+import 'package:audio_player/presentation/pages/audio_collections/ui_models/audio_item_ui.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

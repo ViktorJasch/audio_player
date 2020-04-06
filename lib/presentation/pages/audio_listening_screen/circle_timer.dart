@@ -1,8 +1,8 @@
 import 'dart:async';
-
-import 'package:audio_player/presentation/audio_listening_screen/audio_state_enum.dart';
-import 'package:flutter/material.dart';
 import 'dart:math';
+
+import 'package:audio_player/presentation/pages/audio_listening_screen/audio_state_enum.dart';
+import 'package:flutter/material.dart';
 
 class CircleTimer extends StatefulWidget {
   final Duration audioDuration;

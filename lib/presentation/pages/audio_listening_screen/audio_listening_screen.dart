@@ -1,7 +1,7 @@
-import 'package:audio_player/presentation/audio_collections/ui_models/audio_item_ui.dart';
-import 'package:audio_player/presentation/audio_listening_screen/audio_state_enum.dart';
-import 'package:audio_player/presentation/audio_listening_screen/circle_timer.dart';
-import 'package:audio_player/presentation/settings/settings_screen.dart';
+import 'package:audio_player/presentation/pages/audio_collections/ui_models/audio_item_ui.dart';
+import 'package:audio_player/presentation/pages/audio_listening_screen/audio_state_enum.dart';
+import 'package:audio_player/presentation/pages/audio_listening_screen/circle_timer.dart';
+import 'package:audio_player/presentation/pages/settings/settings_screen.dart';
 import 'package:audio_player/presentation/widgets/audio_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';

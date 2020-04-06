@@ -1,7 +1,7 @@
-import 'package:audio_player/presentation/audio_collections/audio_group_item.dart';
-import 'package:audio_player/presentation/audio_collections/ui_models/audio_group_ui.dart';
-import 'package:audio_player/presentation/audio_collections/ui_models/audio_item_ui.dart';
-import 'package:audio_player/presentation/audio_listening_screen/audio_listening_screen.dart';
+import 'package:audio_player/presentation/pages/audio_collections/audio_group_item.dart';
+import 'package:audio_player/presentation/pages/audio_collections/ui_models/audio_group_ui.dart';
+import 'package:audio_player/presentation/pages/audio_collections/ui_models/audio_item_ui.dart';
+import 'package:audio_player/presentation/pages/audio_listening_screen/audio_listening_screen.dart';
 import 'package:flutter/material.dart';
 
 class AudioGroupHorizontalList extends StatelessWidget {

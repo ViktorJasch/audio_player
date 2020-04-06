@@ -1,4 +1,4 @@
-import 'package:audio_player/presentation/audio_collections/audio_collection_screen.dart';
+import 'package:audio_player/presentation/pages/audio_collections/audio_collection_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
