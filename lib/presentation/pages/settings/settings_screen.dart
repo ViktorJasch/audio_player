@@ -1,3 +1,4 @@
+import 'package:audio_player/presentation/pages/settings/sound_horizontal_list_view.dart';
 import 'package:audio_player/presentation/widgets/audio_app_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -37,7 +38,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   onVolumeChange: (value) => print('newValue: $value'),
                 ),
                 SizedBox(height: 40),
-                SoundListView()
+                SoundHorizontalListView()
               ],
             ),
           ),
@@ -98,49 +99,3 @@ class _VolumeSliderState extends State<VolumeSlider> {
     );
   }
 }
-
-class SoundListView extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text(
-          'SOUND',
-          textAlign: TextAlign.start,
-          style: TextStyle(
-              fontSize: 13,
-              fontWeight: FontWeight.w600,
-              color: Colors.white
-          ),
-        ),
-        Container(
-          padding: EdgeInsets.only(top: 8),
-          height: 48,
-          child: ListView(
-            shrinkWrap: true,
-            scrollDirection: Axis.horizontal,
-            children: List.generate(10, (index) => Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: _getChild(),
-            )),
-          ),
-        )
-      ],
-    );
-  }
-
-  Widget _getChild() {
-    return Container(
-      width: 48,
-      height: 48,
-      decoration: BoxDecoration(
-        color: Colors.purpleAccent,
-        borderRadius: BorderRadius.all(Radius.circular(24))
-      ),
-    );
-  }
-}
-
-
