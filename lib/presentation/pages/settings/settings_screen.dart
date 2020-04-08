@@ -1,4 +1,5 @@
 import 'package:audio_player/presentation/pages/settings/sound_horizontal_list_view.dart';
+import 'package:audio_player/presentation/pages/settings/sound_item_ui.dart';
 import 'package:audio_player/presentation/widgets/audio_app_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -38,7 +39,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   onVolumeChange: (value) => print('newValue: $value'),
                 ),
                 SizedBox(height: 40),
-                SoundHorizontalListView()
+                SoundHorizontalListView(
+                  soundList: List.generate(10, (index) => SoundItemUi(
+                      index == 0,
+                      'Title $index',
+                      index == 0 ? 'assets/picture_active.png' : 'assets/picture.png'
+                  )),
+                )
               ],
             ),
           ),

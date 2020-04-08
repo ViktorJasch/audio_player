@@ -1,6 +1,11 @@
+import 'package:audio_player/presentation/pages/settings/sound_item_ui.dart';
 import 'package:flutter/material.dart';
 
 class SoundHorizontalListView extends StatelessWidget {
+  final List<SoundItemUi> soundList;
+
+  SoundHorizontalListView({@required this.soundList});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,19 +28,20 @@ class SoundHorizontalListView extends StatelessWidget {
             child: ListView(
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
-              children: List.generate(10, (index) => Container(
-                padding: EdgeInsets.only(
-                  left: index == 0 ? 0 : 20,
-                  right: index == 9 ? 0 : 20
-                ),
-                child: _SoundItem(
-                  isSelect: index == 0,
-                  imagePath: index == 0
-                      ? 'assets/picture_active.png'
-                      : 'assets/picture.png',
-                  title: 'Title $index',
-                ),
-              )),
+              children:  soundList.map((item) {
+                final index = soundList.indexOf(item);
+                return Container(
+                  padding: EdgeInsets.only(
+                      left: index == 0 ? 0 : 20,
+                      right: index == 9 ? 0 : 20
+                  ),
+                  child: _SoundItem(
+                    isSelect: item.isSelected,
+                    title: item.title,
+                    imagePath: item.res,
+                  ),
+                );
+              }).toList(),
             ),
           )
         ],
